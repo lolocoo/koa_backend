@@ -1,6 +1,12 @@
 # koa_backend
 koa rest api 
 
+### folder
+- app 应用
+- admin 网站后台
+- website 网站
+- backend 后端程序
+
 ### APP
 - cordova
 - vuejs
