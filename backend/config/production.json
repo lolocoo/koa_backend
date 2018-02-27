@@ -1,0 +1,21 @@
+{
+    "db": {
+        "type": "mysql",
+        "host": "127.0.0.1",
+        "dbname": "nodemysql",
+        "username": "koa",
+        "password": "123456"
+    },
+    "log": {
+    },
+    "error":{
+    },
+    "auth": {
+        "secret": "test",
+        "errMsg": "未认证",
+        "errStatus": 401
+    },
+    "server": {
+        "port": 3000
+    }
+}
