@@ -52,24 +52,25 @@ app.use(async(ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
 
-// Require token for now
-// app.use(async (ctx, next) => {
-//   let token = ctx.request.headers['x-access-token']
-//   if (!token) {
-//     ctx.body = {
-//       "error" : {
-//         "code": 401,
-//         "message": "Unauthorized."
-//       }
-//     }
-//   } else {
-//     return next()
-//   }
-// })
-// routes for website funcs
-app.use(users.routes(), users.allowedMethods())
 // routes for api funcs
 app.use(api.routes(), api.allowedMethods())
+
+// Require token for now
+app.use(async (ctx, next) => {
+  let token = ctx.request.headers['x-access-token']
+  if (!token) {
+    ctx.body = {
+      "error" : {
+        "code": 401,
+        "message": "Unauthorized."
+      }
+    }
+  } else {
+    return next()
+  }
+})
+// routes for website funcs
+app.use(users.routes(), users.allowedMethods())
 
 
 // error-handling
