@@ -1,19 +1,44 @@
 const router = require('koa-router')()
 const jwt = require('jsonwebtoken')
 const secret = 'De Profundis'
+const bcrypt = require('bcrypt')
+const saltRounds = 10
+const salt = bcrypt.genSaltSync(saltRounds)
 const { db } = require('../config')
-
-router.get('/login', async (ctx, next) => {
-  await ctx.render('login', {
-    title: 'Koa2 Login Page'
-  })
-})
+const User = require('../models/user')
 
 router.post('/login', async (ctx, next) => {
   let body = ctx.request.body
-  ctx.body = {
-    token: jwt.sign(body, secret, { expiresIn: '1h' })
+  let user = await User.findOne({where: { userName: body.userName }})
+  let result = {
+    success: false
   }
+  if(user && bcrypt.compareSync(body.password, user.password)) {
+    Object.assign(result, {
+      success: true,
+      token: jwt.sign(body, secret, { expiresIn: '1h' })
+    })
+  }
+  ctx.body = result
+})
+
+router.post('/reg', async (ctx, next) => {
+  let body = ctx.request.body
+  let result = {
+    success: false
+  }
+  let pwHash = bcrypt.hashSync(body.password, salt)
+  let user = await User.findOrCreate({
+    where: { userName: body.userName },
+    defaults: { password: pwHash }
+  })
+  let isCreate = user[1]
+  if (isCreate) {
+    Object.assign(result, {
+      success: true
+    })
+  }
+  ctx.body = result
 })
 
 router.get('/logout', async (ctx, next) => {

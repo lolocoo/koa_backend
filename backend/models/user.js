@@ -9,22 +9,24 @@ const User = sqlz.define('user', {
     }
 })
 
-User.sync({force: true})
-.then(() => {
-   return User.bulkCreate(
-       [
-            {
-                userName: 'koa',
-                password: '1qazse4'
-            },
-            {
-                userName: 'java',
-                password: 'plmnji9'
-            },
-            {
-                userName: 'python',
-                password: 'zenofpython'
-            }
-       ]
-    )
-})
+// User.sync()
+// .then(() => {
+//    return User.bulkCreate(
+//        [
+//             {
+//                 userName: 'koa2',
+//                 password: '1qazse4'
+//             },
+//             {
+//                 userName: 'java',
+//                 password: 'plmnji9'
+//             },
+//             {
+//                 userName: 'python',
+//                 password: 'zenofpython'
+//             }
+//        ]
+//     )
+// })
+
+module.exports = User
