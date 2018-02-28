@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs')
 const router = require('koa-router')()
 const Busboy = require('busboy')
+const { db } = require('../config')
 
 function mkdirsSync(dirname) {
   if ( fs.existsSync(dirname) ) {

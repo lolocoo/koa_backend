@@ -4,6 +4,7 @@ const secret = 'De Profundis'
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 const salt = bcrypt.genSaltSync(saltRounds)
+const { db } = require('../config')
 const User = require('../models/user')
 
 router.post('/login', async (ctx, next) => {
@@ -51,14 +52,14 @@ router.get('/json', async (ctx, next) => {
   }
 })
 
-// router.get('/vue', async (ctx, next) => {
-//   let users = await db.query('select * from users')
-//   console.log(users)
-//   ctx.body = {
-//     data: {
-//       users: users
-//     }
-//   }
-// })
+router.get('/vue', async (ctx, next) => {
+  let users = await db.query('select * from users')
+  console.log(users)
+  ctx.body = {
+    data: {
+      users: users
+    }
+  }
+})
 
 module.exports = router
