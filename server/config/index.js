@@ -1,41 +1,40 @@
 const mysql = require('mysql')
 
-const pool = mysql.createPool({
+const database = {
   host: '127.0.0.1',
   user: 'koa',
   password: '123456',
-  database: 'nodemyql'
-})
+  database: 'nodemyql',
+  type: 'mysql'
+}
 
-let conf = {
-  database: {
-    host: '127.0.0.1',
-    user: 'koa',
-    password: '123456',
-    database: 'nodemyql',
-    type: 'mysql'
-  },
-  db: {
-    // [param..] => values for sql place holder ? replacement
-    query: (sql, values) => {
-      return new Promise((resolve, reject) => {
-        pool.getConnection((err, connection) => {
-          if (err) {
-            reject(err)
-          } else {
-            connection.query(sql, values, (err, results, fields) => {
-              if (err) {
-                reject(err)
-              } else {
-                resolve(results)
-              }
-              connection.release()
-            })
-          }
-        })
+const pool = mysql.createPool(database)
+
+const db = {
+  query: (sql, values) => {
+    return new Promise((resolve, reject) => {
+      pool.getConnection((err, connection) => {
+        if (err) {
+          reject(err)
+        } else {
+          connection.query(sql, values, (err, results, fields) => {
+            if (err) {
+              reject(err)
+            } else {
+              resolve(results)
+            }
+            connection.release()
+          })
+        }
       })
-    }
+    })
   }
 }
 
-module.exports = conf
+const baseapi = 'api'
+
+module.exports = {
+  database,
+  db,
+  baseapi
+}

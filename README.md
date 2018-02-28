@@ -1,11 +1,15 @@
-# koa_backend
+# koa backend
 koa rest api 
+
+### TODO
+- docker
+- sms
 
 ### folder
 - app 应用
 - admin 网站后台
 - website 网站
-- backend 后端程序
+- server 后端程序
 
 ### APP
 - cordova
@@ -16,10 +20,6 @@ koa rest api
 - vuejs
 - element-ui [source](http://element.eleme.io/)
 - vue-element-admin [source](https://github.com/PanJiaChen/vue-element-admin)
-
-### TODO
-- docker
-- sms
 
 ### SOFTWARE
 - Visual Studio Code
