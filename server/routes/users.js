@@ -10,7 +10,9 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
+  ctx.body = {
+    test: 'this is a users/bar response'
+  }
 })
 
 module.exports = router
