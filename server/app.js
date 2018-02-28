@@ -15,9 +15,10 @@ const secret = 'De Profundis'
 // authentication
 // require('./routes/auth')
 
-const index = require('./routes/index')
-const upload = require('./routes/upload')
-const users = require('./routes/users')
+const index = require('./src/routes/index')
+const upload = require('./src/routes/upload')
+const users = require('./src/routes/users')
+const api = require('./src/routes/api')
 
 // error handler
 onerror(app)
@@ -50,6 +51,9 @@ app.use(async(ctx, next) => {
 // routes for login
 app.use(index.routes(), index.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
+
+// routes for api funcs
+app.use(api.routes(), api.allowedMethods())
 
 // Require token for now
 app.use(async (ctx, next) => {
