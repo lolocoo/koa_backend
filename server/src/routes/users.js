@@ -1,16 +1,9 @@
 const router = require('koa-router')()
+const config = require('../../config')
+const UserControllers = require('../controllers/user')
 
-// router.prefix('/users')
-
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!',
-    user: ctx
-  })
-})
-
-router.get('/bar', function (ctx, next) {
-  ctx.body = 'this is a users/bar response'
-})
+router.prefix(`/${config.baseapi}`)
+router.post('/login', UserControllers.login)
+router.post('/reg', UserControllers.register)
 
 module.exports = router

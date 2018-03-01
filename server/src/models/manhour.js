@@ -1,4 +1,4 @@
-const { ODM, sqlz } = require('./sqlz')
+const { ODM, sqlz } = require('../utils/store')
 const { data } = require('./manhourData')
 
 const Manhour = sqlz.define('manhour', 
@@ -20,6 +20,6 @@ const Manhour = sqlz.define('manhour',
 )
 
 Manhour.sync({force: true})
-.then(() => {
-   return Manhour.bulkCreate(data)
-})
+    .then(() => {
+        return Manhour.bulkCreate(data)
+    })

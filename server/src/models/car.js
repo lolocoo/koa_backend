@@ -1,4 +1,4 @@
-const { ODM, sqlz } = require('./sqlz')
+const { ODM, sqlz } = require('../utils/store')
 
 const Car = sqlz.define('car', {
     carBrand: {
